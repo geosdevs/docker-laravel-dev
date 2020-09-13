@@ -16,6 +16,8 @@ services:
     - ../laravel-01:/var/www/html/
     - web-laravel-01-var-data:/var/www/html/var
     - web-laravel-01-vendor-data:/var/www/html/vendor
+    environment:
+      PHP_IDE_CONFIG: serverName=web
     ports:
     - 80:80
 volumes:

@@ -6,6 +6,8 @@ RUN docker-php-ext-install intl
 RUN apt-get install -y libzip-dev unzip
 RUN docker-php-ext-install zip
 
+RUN pecl install xdebug-2.9.6 && docker-php-ext-enable xdebug
+
 RUN a2enmod rewrite
 
 VOLUME /var/www/html/var
@@ -26,5 +28,5 @@ WORKDIR /var/www/html
 
 #RUN chown -R www-data:www-data storage/
 
-COPY php.ini /usr/local/etc/php/php.ini
+COPY php.ini /usr/local/etc/php/conf.d/docker-laravel-dev.ini
 COPY vhost.conf /etc/apache2/sites-enabled/010-laravel.conf
