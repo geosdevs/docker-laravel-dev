@@ -8,6 +8,8 @@ RUN docker-php-ext-install zip
 
 RUN pecl install xdebug-2.9.6 && docker-php-ext-enable xdebug
 
+RUN docker-php-ext-install pdo_mysql && docker-php-ext-enable pdo_mysql
+
 RUN a2enmod rewrite
 
 VOLUME /var/www/html/var
