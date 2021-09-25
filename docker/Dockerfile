@@ -12,11 +12,11 @@ RUN docker-php-ext-install pdo_mysql && docker-php-ext-enable pdo_mysql
 
 RUN a2enmod rewrite
 
+RUN mkdir -m775 /var/www/html/var /var/www/html/vendor
+RUN chown -R www-data:www-data /var/www/html/var && chown -R www-data:www-data /var/www/html/vendor
+
 VOLUME /var/www/html/var
 VOLUME /var/www/html/vendor
-
-RUN chown -R www-data:www-data /var/www/html/var
-RUN chown -R www-data:www-data /var/www/html/vendor
 
 WORKDIR /opt
 
