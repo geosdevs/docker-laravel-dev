@@ -8,19 +8,17 @@ services:
     volumes:
     - db-laravel-01-data:/var/lib/mysql
     ports:
-    - 3307:3306
+    - 3306:3306
   web:
     build: ./docker
     image: gfreezz/laravel-dev
     volumes:
-    - ../laravel-01:/var/www/html/
-    - web-laravel-01-var-data:/var/www/html/var
-    - web-laravel-01-vendor-data:/var/www/html/vendor
+    - /home/ubuntu/projects/laravel-01:/var/www/html/
     environment:
       PHP_IDE_CONFIG: serverName=web
     ports:
     - 80:80
+    depends_on:
+      - db
 volumes:
   db-laravel-01-data:
-  web-laravel-01-var-data:
-  web-laravel-01-vendor-data:

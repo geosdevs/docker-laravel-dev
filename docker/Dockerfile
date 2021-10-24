@@ -12,11 +12,7 @@ RUN docker-php-ext-install pdo_mysql && docker-php-ext-enable pdo_mysql
 
 RUN a2enmod rewrite
 
-RUN mkdir -m775 /var/www/html/var /var/www/html/vendor
-RUN chown -R www-data:www-data /var/www/html/var && chown -R www-data:www-data /var/www/html/vendor
-
-VOLUME /var/www/html/var
-VOLUME /var/www/html/vendor
+RUN apt-get install -y git
 
 WORKDIR /opt
 
@@ -26,9 +22,8 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
     && ln -s /opt/composer.phar /usr/bin/composer
 
 WORKDIR /var/www/html
-#RUN composer install
-
-#RUN chown -R www-data:www-data storage/
+RUN mkdir -m775 /var/www/html/storage/ && chown -R www-data:www-data /var/www/html/storage/
+VOLUME /var/www/html/
 
 COPY php.ini /usr/local/etc/php/conf.d/docker-laravel-dev.ini
 COPY vhost.conf /etc/apache2/sites-enabled/010-laravel.conf
